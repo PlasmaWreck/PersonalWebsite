@@ -1,92 +1,122 @@
 let inputText = document.getElementById("inputText");
-let outputText = document.getElementById("outputText");
+let taskList = document.getElementById("taskList");
 let displayName = document.getElementById("displayName");
-let nameArray = [];
 
-let NFO = JSON.parse(localStorage.getItem("Names"));
+
+let taskArray = [];
+
+let amountOfTasks = taskArray.length;
 
 inputText.addEventListener("keypress", function (e) {
 
     if (e.code == "Enter") {
 
-        appendElements(inputText.value);
+        taskArray[amountOfTasks] = inputText.value;
+        localStorage.setItem("Tasks", JSON.stringify(taskArray));
+
+        createTask(amountOfTasks);
+        
+        inputText.value = "";
     }
 });
 
-function appendElements(classList) {
+
+
+
+
+function createTask(arrayLocation) {
 
     let liElement = document.createElement("li");
+    let closeIMG = document.createElement("img");
+    let taskText = document.createElement("p");
+    let container = document.createElement("div");
+    let row = document.createElement("div");
+    let colText = document.createElement("div");
+    let colIMG = document.createElement("div");
+
+    colIMG.setAttribute("class", "col-2 d-flex justify-content-center align-items-center");
+    colText.setAttribute("class", "col-10");
+    row.setAttribute("class", "row");
+
+    container.setAttribute("class", "container-fluid");
+    closeIMG.setAttribute("src", "./images/CloseX.png");
+    closeIMG.setAttribute("class", "closeIMGSize");
 
 
-    liElement.innerText = classList;
-    nameArray.push(liElement.innerText);
+    liElement.setAttribute("id", "taskElement" + arrayLocation);
+    taskText.setAttribute("id", "taskText" + arrayLocation);
 
+    taskText.innerText = taskArray[arrayLocation];
+    
+    colIMG.addEventListener("click", function(){
 
-    liElement.addEventListener("click", function (e) {
-
-        e.target.remove();
-
-        for (let i = 0; i < nameArray.length; i++) {
-            if (nameArray[i] == e.target.innerText) {
-
-                nameArray.splice(i, 1);
-                localStorage.setItem("Names", JSON.stringify(nameArray));
-
-            }
-        }
+        removeTask(arrayLocation);
+        
     });
 
-    outputText.appendChild(liElement);
-
-    inputText.value = "";
 
 
-    localStorage.setItem("Names", JSON.stringify(nameArray));
+    
 
+    colText.appendChild(taskText);
+    colIMG.appendChild(closeIMG);
+    row.appendChild(colText);
+    row.appendChild(colIMG);
+    container.appendChild(row);
+    liElement.appendChild(container);
+    taskList.appendChild(liElement);
+
+    amountOfTasks = taskArray.length;
+
+    console.log(taskArray);
+    console.log(amountOfTasks);
+}
+
+function removeTask(taskNum){
+
+    for(i = 0; i < amountOfTasks; i++){
+
+            
+
+        if(taskArray[i] == document.getElementById("taskText" + taskNum).innerText || taskArray[i] === null){
+
+            taskArray.splice(i, 1);
+            console.log(taskArray);
+
+        }
+
+        localStorage.setItem("Tasks", JSON.stringify(taskArray));
+        
+    }
+    
+    amountOfTasks = taskArray.length;
+    console.log(amountOfTasks);
+    document.getElementById("taskElement" + taskNum).remove();
 
 }
 
 
 
-let nameButton = document.getElementById("nameButton").addEventListener("click", function () {
+function createTaskList() {
 
-    if (nameArray.length <= 0) {
-        displayName.innerText = "There are no names here..."
+
+    if (JSON.parse(localStorage.getItem("Tasks")) != null) {
+        taskArray = JSON.parse(localStorage.getItem("Tasks"));
+        amountOfTasks = taskArray.length;
     } else {
-        selectedName = nameArray[Math.floor(Math.random() * nameArray.length)];
-        displayName.innerText = selectedName;
+        localStorage.setItem("Tasks", JSON.stringify(taskArray));
+        amountOfTasks = taskArray.length;
     }
 
-});
+    for (i = 0; i < taskArray.length; i++) {
 
-
-if (NFO != "" || NFO != null) {
-
-    for (let i = 0; i < NFO.length; i++) {
-        let liElement = document.createElement("li");
-
-
-        liElement.innerText = NFO[i];
-        nameArray.push(liElement.innerText);
-
-
-        liElement.addEventListener("click", function (e) {
-
-            e.target.remove();
-
-            for (let i = 0; i < nameArray.length; i++) {
-                if (nameArray[i] == e.target.innerText) {
-
-                    nameArray.splice(i, 1);
-                    localStorage.setItem("Names", JSON.stringify(nameArray));
-
-                }
-            }
-        });
-
-        outputText.appendChild(liElement);
-        //nameArray.push(NFO[i]);
-        localStorage.setItem("Names", JSON.stringify(nameArray));
+        createTask(i);
     }
+
+    
 
 }
+
+
+
+createTaskList();

@@ -5,23 +5,34 @@ a.cardLinkColorInherit:hover {
   
 }
 
+.closeIMGSize{
+    height: 20px;
+    width: auto;
+}
 
+.col-10 {
+    -moz-hyphens:auto;
+    -ms-hyphens:auto;
+    -webkit-hyphens:auto;
+    hyphens:auto;
+    word-wrap:break-word;
+ }
 
 
 .navbar-custom{
     color: black;
 }
+
 .mainBG{
     background-color: black;
 }
+
 .onTopBG{
     background-color: rgb(46, 48, 48);
 }
 
 .grayOutline{
-    list-style-type:none;
-    border: 1px solid #a1a1a1;
-    background-color: rgb(46, 48, 48);
+    
     
 }
 
@@ -40,25 +51,30 @@ a.cardLinkColorInherit:hover {
     display: flex;
     align-items: center;
 }
+
 .alignCenterX{
     display: flex;
     justify-content: center;
 }
 
-.upSizeText{
-    font-size: 200%;
+.setFontSize30{
+    font-size: 30px;
 }
-.superSizeText{
-    font-size: 600%;
+.setFontSize70{
+    font-size: 70px;
 }
 
 
 
 
-.taskListSizeFix{
+.taskListStyle{
     min-height: 550px;
     width: auto;
+    list-style-type:none;
+    border: 1px solid #a1a1a1;
+    background-color: rgb(78, 78, 78)
 }
+
 li.setup,
 li.setup:before {
     content: "- ";
