@@ -31,11 +31,6 @@ a.cardLinkColorInherit:hover {
     background-color: rgb(46, 48, 48);
 }
 
-.grayOutline{
-    
-    
-}
-
 .cardOutline{
     border-color: #a1a1a1;
     background-color: rgb(46, 48, 48);
@@ -64,6 +59,10 @@ a.cardLinkColorInherit:hover {
     font-size: 70px;
 }
 
+.undoBtnSize{
+    height: 50px;
+    width: auto;
+}
 
 
 

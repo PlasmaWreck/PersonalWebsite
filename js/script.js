@@ -1,6 +1,9 @@
 let inputText = document.getElementById("inputText");
 let taskList = document.getElementById("taskList");
 let displayName = document.getElementById("displayName");
+let undoBtn = document.getElementsById("undoBtn");
+
+let lastActionArray = [];
 
 
 let taskArray = [];
@@ -70,6 +73,14 @@ function createTask(arrayLocation) {
 
     console.log(taskArray);
     console.log(amountOfTasks);
+}
+
+
+function undoAction(){
+
+    if(lastActionArray[lastActionArray.length] == "remove"){
+        
+    }
 }
 
 function removeTask(taskNum){
